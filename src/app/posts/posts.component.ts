@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PostHelperService } from '../shared/post-helper.service';
 import { Observable } from 'rxjs/Observable';
 import { PostObject } from '../shared/models/posts.model';
+import { PostHelperService } from '../shared/services/post-helper.service';
 
 @Component({
   selector: 'app-posts',
@@ -10,8 +10,7 @@ import { PostObject } from '../shared/models/posts.model';
 })
 export class PostsComponent implements OnInit {
   $posts: Observable<PostObject[]>;
-  constructor(
-    private postService: PostHelperService) { }
+  constructor(private postService: PostHelperService) { }
 
   ngOnInit() {
     this.$posts = this.postService.getPosts();

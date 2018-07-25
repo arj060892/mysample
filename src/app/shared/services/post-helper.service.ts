@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { UserObject } from './models/user.model';
-import { Utility } from './utility';
-import { PostObject } from './models/posts.model';
+import { UserObject } from '../models/user.model';
+import { Utility } from '../utility';
+import { PostObject } from '../models/posts.model';
 @Injectable()
 export class PostHelperService {
 

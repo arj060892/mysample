@@ -33,6 +33,10 @@
           </div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
+        <span *ngIf="isServiceCalled">Loading...</span>
+        <div class="alert alert-danger" *ngIf="isUserInValid">
+          <strong>Error!</strong> Invalid Credentials.
+        </div>
       </form>
 
     </div>

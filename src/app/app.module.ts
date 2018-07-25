@@ -9,10 +9,11 @@ import { LoginComponent } from './login/login.component';
 import { PostsComponent } from './posts/posts.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { PostCountComponent } from './post-count/post-count.component';
-import { PostHelperService } from './shared/post-helper.service';
+import { PostHelperService } from './shared/services/post-helper.service';
+
 
 const routes: Routes = [
-  { path: '*', redirectTo: 'login', pathMatch: 'full' },
+  { path: '*', redirectTo: '', pathMatch: 'full' },
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'posts', component: PostsComponent },

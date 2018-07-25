@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Utility } from '../shared/utility';
-import { PostHelperService } from '../shared/post-helper.service';
+
 import { UserObject } from '../shared/models/user.model';
 import { Router } from '@angular/router';
+import { PostHelperService } from '../shared/services/post-helper.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,7 +12,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-
+  isServiceCalled = false;
+  isUserInValid = false;
   constructor(
     private fb: FormBuilder,
     private postService: PostHelperService,
@@ -34,17 +36,23 @@ export class LoginComponent implements OnInit {
   onLogin() {
     Utility.onValidateForm(this.loginForm);
     if (this.loginForm.valid) {
-
+      this.isServiceCalled = true;
       this.postService.getUserDetails()
         .subscribe(
           (users: UserObject[]) => {
-            users.forEach(user => {
-              if (this.validateUser(user)) {
-                this.route.navigate(['/posts']);
-                return;
-              }
+            const verifiedUser = users.filter(user => {
+              return this.validateUser(user);
             });
-          }
+
+            if (verifiedUser.length > 0) {
+              this.route.navigate(['/posts']);
+            } else {
+              this.isUserInValid = true;
+            }
+
+          },
+          (error) => console.log(error),
+          () => { this.isServiceCalled = false; }
         );
     }
   }
