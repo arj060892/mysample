@@ -2,7 +2,9 @@
   <div class="container">
     <div class="jumbotron">
       <h2>Login</h2>
-      <form #f="ngForm" (ngSubmit)="onLogin(f.value)">
+
+      <!-- Template Driven Form -->
+      <!-- <form #f="ngForm" (ngSubmit)="onLogin(f.value)">
         <div class="form-group">
           <label for="id">ID:</label>
           <input type="text" class="form-control" id="id" name="id" placeholder="ID" ngModel>
@@ -12,7 +14,27 @@
           <input type="text" class="form-control" id="userID" name="userID" placeholder="User Id" ngModel>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
+      </form> -->
+
+      <!-- Reactive Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <div class="form-group">
+          <label for="id">ID:</label>
+          <input type="text" class="form-control" placeholder="ID" formControlName="id">
+          <div class="alert alert-danger" *ngIf="idControl.hasError('required') && idControl.touched">
+            <strong>Error!</strong> Field Required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="userID">UserID:</label>
+          <input type="text" class="form-control" i placeholder="User Id" formControlName="userID">
+          <div class="alert alert-danger" *ngIf="userIDControl.hasError('required') && userIDControl.touched">
+            <strong>Error!</strong> Field Required.
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+
     </div>
   </div>
 </div>
