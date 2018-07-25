@@ -1,0 +1,5 @@
+.jumbotron {
+  max-height: 550px;
+  overflow-x: scroll;
+  overflow-y: none;
+}
